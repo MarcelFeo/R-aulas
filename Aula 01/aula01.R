@@ -75,7 +75,7 @@ mean(soma == 3)
 
 # sum(dado1 == 3) # Quantas vezes o lançamento do dado1 saiu o número3
 
-#================================================================================
+#===============================================================================
 
 # Observações
 
@@ -92,21 +92,3 @@ vetTest <- c(TRUE, FALSE, TRUE)
 sum(vetTest)
 
 # Se fazer ?[nome da função] a ide abre a documentação da linguagem
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
