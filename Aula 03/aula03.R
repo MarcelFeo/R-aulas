@@ -48,6 +48,10 @@ summary(mulheres)
 table(mulheres$Survived)
 barplot(table(mulheres$Survived))
 
+# Quantos homens da terceira classe morreram?
+homemtc <- homens[homens$Pclass == 3,]
+summary(homemtc)
+
 #=======================================================================
 
 # Observações:
