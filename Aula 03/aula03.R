@@ -51,10 +51,3 @@ barplot(table(mulheres$Survived))
 # Quantos homens da terceira classe morreram?
 homemtc <- homens[homens$Pclass == 3,]
 summary(homemtc)
-
-#=======================================================================
-
-# Observações:
-
-# exemplo: tirar coluna 1 e 12 do vetor
-#dados <- dados[, -c(1, 12)]
