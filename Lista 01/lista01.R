@@ -44,12 +44,57 @@ n2 <- seq(10, 20, by = 1)
 r2 <- sum((3^n2)/n2 + (2^n2)/(n2^2))
 r2
 
+#------------------------------------------------------------
 
+# Exercício 04:
 
+sorteio <- sample(x = 1:100, size = 40, replace = TRUE)
 
+# (a)
+total_pares = sum(sorteio %% 2 == 0)
 
+# (b)
+maior_setenta = sum(sorteio > 70)
 
+# (c)
+for(i in 1:40) {
+  if(sorteio[i] %% 2 != 0) {
+    print(i)
+  }
+}
 
+#------------------------------------------------------------
 
+# Exercício 05:
 
+joga_dado <- function() {
+  acertos <- 0
+  n <- 0
+  
+  while(acertos < 2) {
+    dado <- sample(x = 1:6, size = 1, replace = TRUE)
+    
+    if(dado == 4) {
+      acertos <- acertos + 1
+    }
+    
+    n <- n + 1
+  }
 
+  return(n)
+}
+
+#------------------------------------------------------------
+
+# Exercício 06:
+
+quantidades <- c()
+
+for(i in 1:10000) {
+  num_lancamento <- joga_dado()
+  quantidades[i] <- num_lancamento
+}
+
+# mean(quantidades) - A média que calculamos mostra a média de quantos lançamentos são necessários para que o número 4 seja obtido pela segunda vez durante uma sequência de lançamentos do dado.
+
+#------------------------------------------------------------
