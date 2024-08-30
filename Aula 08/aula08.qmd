@@ -1,0 +1,51 @@
+---
+title: "Aula 08/30/2024"
+author: "Marcel Féo"
+format: html
+editor: visual
+---
+
+## Classificação de canceres
+
+```{r}
+
+library(ggplot2)
+library(class)
+
+dados <- read.csv(file = "cancer.csv", header = TRUE)
+str(dados)
+
+n <- round(0.8 * nrow(dados))
+
+indices_treino <- sample(1:nrow(dados), size = n, replace = FALSE)
+
+treino <- dados[indices_treino,]
+teste <- dados[-indices_treino,]
+
+```
+
+
+## Criando modelo
+
+```{r}
+
+library(rpart)
+library(rpart.plot)
+
+modelo.arvore <- rpart(formula = diagnosis~ ., data = treino, method = "class")
+rpart.plot(modelo.arvore, extra = 101)
+
+```
+
+## Previsão
+
+Comparando o teste com o momdelo, para a classificação
+
+```{r}
+
+previsao = predict(modelo.arvore, newdata = teste, type = "class")
+previsao
+
+mean(previsao == teste$diagnosis)
+
+```
