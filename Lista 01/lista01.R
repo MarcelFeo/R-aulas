@@ -98,3 +98,58 @@ for(i in 1:10000) {
 # mean(quantidades) - A média que calculamos mostra a média de quantos lançamentos são necessários para que o número 4 seja obtido pela segunda vez durante uma sequência de lançamentos do dado.
 
 #------------------------------------------------------------
+
+# Exercício 07:
+
+fibonacci <- function(n) {
+  if (n < 3) {
+    stop("O valor de entrada da função deve ser n >= 3.")
+  }
+  
+  x <- c(1, 1)
+  
+  for (i in 3:n) { x[i] <- x[i-1] + x[i-2] }
+  
+  return(x)
+}
+
+#------------------------------------------------------------
+
+# Exercício 08:
+
+funcionarios <- c("Michael Scott", "Dwight Schrute", "Jim Halpert", "Kevin Malone", "Creed Bratton")
+
+resultado_sorteio <- c()
+
+for(i in 1:100000) {
+  for(j in 1:5) {
+    amigo_oculto <- sample(x = 1:5, size = 1, replace = TRUE)
+    
+    if(funcionarios[j] == funcionarios[amigo_oculto]) {
+      resultado_sorteio[i] <- 0
+    } else {
+      resultado_sorteio[i] <- 1
+    }
+  }
+}
+
+mean(resultado_sorteio)
+
+#------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
