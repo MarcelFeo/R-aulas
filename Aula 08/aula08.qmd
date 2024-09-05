@@ -39,7 +39,7 @@ rpart.plot(modelo.arvore, extra = 101)
 
 ## Previsão
 
-Comparando o teste com o momdelo, para a classificação
+Comparando o teste com o modelo, para a classificação
 
 ```{r}
 

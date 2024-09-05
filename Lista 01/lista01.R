@@ -120,20 +120,23 @@ fibonacci <- function(n) {
 funcionarios <- c("Michael Scott", "Dwight Schrute", "Jim Halpert", "Kevin Malone", "Creed Bratton")
 
 resultado_sorteio <- c()
+num_sorteio <- 0
 
 for(i in 1:100000) {
+  amigo_oculto <- sample(x = 1:5, size = 5, replace = TRUE)
+  certo <- 1
+  
   for(j in 1:5) {
-    amigo_oculto <- sample(x = 1:5, size = 1, replace = TRUE)
-    
-    if(funcionarios[j] == funcionarios[amigo_oculto]) {
-      resultado_sorteio[i] <- 0
-    } else {
-      resultado_sorteio[i] <- 1
+    if(j == amigo_oculto[j]) {
+      certo <- 0
+      break
     }
   }
+  
+  resultado_sorteio[i] <- ifelse(certo, 0, 1)
 }
 
-mean(resultado_sorteio)
+mean(resultado_sorteio == 0)
 
 #------------------------------------------------------------
 
