@@ -140,11 +140,53 @@ mean(resultado_sorteio == 0)
 
 #------------------------------------------------------------
 
+# Exercício 09:
 
+resultados_jogos <- c()
 
+for (i in 1:100000) {
+  
+  lancamento1 <- sample(x = 1:6, size = 1)
+  lancamento2 <- sample(x = 1:6, size = 1)
+  
+  soma_dados <- lancamento1 + lancamento2
+  nova_soma <- soma_dados
+  
+  if (soma_dados == 7 | soma_dados == 11) {
+    cat(sprintf("%d + %d = %d. Você venceu!\n", lancamento1, lancamento2, soma_dados))
+    resultados_jogos[i] <- 1
+    
+  } else if (soma_dados == 2 | soma_dados == 3 | soma_dados == 12) {
+    cat(sprintf("%d + %d = %d. Você perdeu!\n", lancamento1, lancamento2, soma_dados))
+    resultados_jogos[i] <- 0
+    
+  } else {
+    repeat {
+      lancamento1 <- sample(x = 1:6, size = 1)
+      lancamento2 <- sample(x = 1:6, size = 1)
+      nova_soma <- lancamento1 + lancamento2
+      
+      if (nova_soma == 7 | nova_soma == soma_dados) {
+        break
+      }
+    }
+    
+    if (nova_soma == 7) {
+      cat(sprintf("%d + %d = %d. Você perdeu!\n", lancamento1, lancamento2, nova_soma))
+      resultados_jogos[i] <- 0
+      
+    } else {
+      cat(sprintf("%d + %d = %d. Você venceu!\n", lancamento1, lancamento2, nova_soma))
+      resultados_jogos[i] <- 1
+    }
+  }
+}
 
+mean(resultados_jogos)
 
+#------------------------------------------------------------
 
+# Exercício 10:
 
 
 
