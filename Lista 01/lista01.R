@@ -1,3 +1,5 @@
+library(ggplot2)
+
 # Lista 01
 # Aluno: Marcel Fernando Lobo de Féo - 12211BCC042
 #------------------------------------------------------------
@@ -188,13 +190,81 @@ mean(resultados_jogos)
 
 # Exercício 10:
 
+# letra a
+funcao_a <- function(l) {
 
+  chegou <- 0
+  caiu <- 0
+  while(chegou == 0 & caiu == 0) {
+    if (l >= 20) {
+      print("Luke está em casa!")
+      chegou <- 1
+    } else if (l < 0) {
+      print("Luke caiu no precipício!")
+      caiu <- 1
+    } else {
+      sorteio_moeda = sample(x = 1:2, size = 1) # 1 -> coroa e 2 -> cara
+      
+      if (sorteio_moeda == 1) {
+        l = l - 1
+      } else {
+        l = l + 1
+      } 
+    }
+    
+  }  
+}
 
+# letra b
 
+funcao_b <- function(l) {
+  
+  resultados_luke <- c()
+  
+  for (i in 1:10000) {
+    chegou <- 0
+    caiu <- 0
+    l_teste <- l
+    
+    while(chegou == 0 & caiu == 0) {
+      if (l_teste >= 20) {
+        chegou <- 1
+        resultados_luke[i] <- 1
+      } else if (l_teste < 0) {
+        caiu <- 1
+        resultados_luke[i] <- 0
+      } else {
+        sorteio_moeda = sample(x = 1:2, size = 1) # 1 -> coroa e 2 -> cara
+        
+        if (sorteio_moeda == 1) {
+          l_teste = l_teste - 1
+        } else {
+          l_teste = l_teste + 1
+        } 
+      }
+      
+    }    
+  }
+  
+  return (mean(resultados_luke))
+  
+}
 
+# letra c
+resultados_grafico <- c()
+  
+for (i in 1:19) { resultados_grafico[i] <- funcao_b(i) }
 
+dados <- data.frame(L = 1:19, Proporcao = resultados_grafico)
 
+ggplot(dados, aes(x = 1:19, y = resultados_grafico)) +
+  geom_line() +
+  geom_point() +
+  labs(x = "Posição Inicial", y = "Proporção")
 
+#------------------------------------------------------------
+
+# Exercício 11:
 
 
 
