@@ -266,5 +266,27 @@ ggplot(dados, aes(x = 1:19, y = resultados_grafico)) +
 
 # Exercício 11:
 
+# letra a
+link_passeio <- function(n) {
+  passos <- sample(c("L", "R", "U", "D"), n, replace = TRUE)
+  ponto <- c(0, 0)
+  
+  for (p in passos) {
+    if (p == "L") {
+      ponto[1] <- ponto[1] - 1
+    } else if (p == "R") {
+      ponto[1] <- ponto[1] + 1
+    } else if (p == "U") {
+      ponto[2] <- ponto[2] + 1
+    } else if (p == "D") {
+      ponto[2] <- ponto[2] - 1
+    }
+  }
+  
+  return(ponto)
+}
 
+ponto_final <- link_passeio(8)
+sprintf("Posição final: (%d, %d)", ponto_final[1], ponto_final[2])
 
+# letra b
