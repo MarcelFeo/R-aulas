@@ -267,6 +267,7 @@ ggplot(dados, aes(x = 1:19, y = resultados_grafico)) +
 # Exercício 11:
 
 # letra a
+
 link_passeio <- function(n) {
   passos <- sample(c("L", "R", "U", "D"), n, replace = TRUE)
   ponto <- c(0, 0)
@@ -290,3 +291,85 @@ ponto_final <- link_passeio(8)
 sprintf("Posição final: (%d, %d)", ponto_final[1], ponto_final[2])
 
 # letra b
+
+voltou_origem <- 0
+
+for (i in 1:10000) {
+  pf <- link_passeio(8)
+  
+  if (all(pf == c(0, 0))) {
+    voltou_origem <- voltou_origem + 1
+  }
+}
+
+proporcao <- voltou_origem / 10000
+# A proporção mostra quantas vezes Link voltou ao ponto inicial depois de 8 passos, em 10.000 simulações. Se a proporção for baixa, significa que é difícil ele voltar à origem, já que seus movimentos são aleatórios e ele tende a se afastar do ponto de partida.
+
+# letra c
+
+verifica_passos <- function(n) {
+  if (n %% 2 == 1) {
+    return("Impossível retornar à origem depois de um número ímpar de passos")
+  } else {
+    voltou_origem <- 0
+    
+    for (i in 1:10000) {
+      pf <- link_passeio(n)
+      
+      if (all(pf == c(0, 0))) {
+        voltou_origem <- voltou_origem + 1
+      }
+    }
+    
+    proporcao <- voltou_origem / 10000
+    
+    return(paste("A proporção de vezes que Link retornou à origem após", n, "passos é:", proporcao))
+  }
+}
+verifica_passos(4)
+
+#------------------------------------------------------------
+
+# Exercício 12:
+
+vitoria_garnit <- 0
+
+for (i in 1:10000) {
+  
+  steven <- c(0, 1, 0)
+  garnit <- c(0, 0, 1)
+  
+  ultimos <- c(NA, NA, NA)
+  
+  while (TRUE) {
+    lancamento <- sample(x = 0:1, size = 1) # 0 = coroa e 1 = cara
+    
+    # Atualiza os três últimos lançamentos
+    ultimos <- c(ultimos[2:3], lancamento)
+    
+    if (!any(is.na(ultimos))) {
+      if (all(ultimos == steven)) {
+        print("steven")
+        break
+      }
+      if (all(ultimos == garnit)) {
+        vitoria_garnit <- vitoria_garnit + 1
+        print("garnit")
+        break
+      }
+    }
+  }
+}
+
+media_vitoria <- vitoria_garnit / 10000
+
+#------------------------------------------------------------
+
+# Exercício 13:
+
+
+
+
+
+
+
