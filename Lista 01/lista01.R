@@ -1,7 +1,8 @@
-library(ggplot2)
-
 # Lista 01
 # Aluno: Marcel Fernando Lobo de Féo - 12211BCC042
+
+library(ggplot2)
+
 #------------------------------------------------------------
 
 # Exercício 01:
@@ -367,9 +368,135 @@ media_vitoria <- vitoria_garnit / 10000
 
 # Exercício 13:
 
+dados_arquivo <- read.csv("dados.txt", sep = ";")
 
+# letra a
 
+ggplot(dados_arquivo, aes(x = Genero)) +
+  geom_bar(fill = "lightblue") +
+  labs(x = "Gênero")
 
+# Maioria das vítimas eram mulheres
 
+# letra b
 
+ggplot(dados_arquivo, aes(x = Idade)) +
+  geom_histogram(bins = 8, fill = "lightpink", , color = "darkred") +
+  labs(x = "Idade")
 
+# Maior parte das vítimas são de idades avançadas
+
+# letra c
+
+ggplot(dados_arquivo, aes(y = Idade)) +
+  geom_boxplot(fill = "lightgreen") +
+  labs(y = "Idade")
+
+# A mediana das idades das vítimas está em torno dos 80 anos.
+
+# letra d
+
+ggplot(dados_arquivo, aes(x = LocalDaMorte)) +
+  geom_bar(fill = "lightyellow") +
+  labs(x = "Local da Morte")
+
+# Maioria das vítimas morreu em casa
+
+# letra e
+
+ggplot(dados, aes(x = AnoDaMorte)) +
+  geom_histogram(binwidth = 1, fill = "lightgray", color = "black") +
+  labs(x = "Ano da Morte")
+
+# As mortes se estão ao longo de algumas décadas, com picos nos anos 80 e 90. 
+
+# letra f
+
+# Com base nos dados observados anteriores, podemos ver alguns padrões, como a maioria das vítimas sendo do sexo feminino, com idades avançadas, maioria das mortes sendo em casa. Esse perfil pode indicar que Shipman focava em pacientes idosos, muitas vezes em sua própria casa.
+
+#------------------------------------------------------------
+
+# Exercício 14:
+
+# letra a
+
+dados_arquivo2 <- read.table("primatas.txt", sep=":", header=TRUE)
+str(dados_arquivo2)
+summary(dados_arquivo2)
+
+# letra b
+
+ggplot(dados_arquivo2, aes(x=especie)) +
+  geom_bar() +
+  labs(title="Bonobos e Chimpanzés", x="Espécie", y="Contagem")
+
+ggplot(dados_arquivo2, aes(x=especie, fill=genero)) +
+  geom_bar(position="dodge") +
+  labs(title="Machos e Fêmeas por Espécie", x="Espécie", y="Contagem", fill="Gênero")
+
+# letra c
+
+bonobos <- subset(dados_arquivo2, especie == "bonobo")
+
+ggplot(bonobos, aes(x=genero, y=peso, fill=genero)) +
+  geom_boxplot() +
+  labs(title="Machos e Fêmeas de Bonobos", x="Gênero", y="Peso")
+
+chimpanzes <- subset(dados_arquivo2, especie == "chimpanze")
+
+ggplot(chimpanzes, aes(x=genero, y=peso, fill=genero)) +
+  geom_boxplot() +
+  labs(title="Machos e Fêmeas de Chimpanzés", x="Gênero", y="Peso")
+
+# letra d
+
+femeas <- subset(dados_arquivo2, genero == "femea")
+
+ggplot(femeas, aes(x=especie, y=peso, fill=especie)) +
+  geom_boxplot() +
+  labs(title="Fêmeas de Bonobos e Chimpanzés", x="Espécie", y="Peso")
+
+machos <- subset(dados_arquivo2, genero == "macho")
+
+ggplot(machos, aes(x=especie, y=peso, fill=especie)) +
+  geom_boxplot() +
+  labs(title="Machos de Bonobos e Chimpanzés", x="Espécie", y="Peso")
+
+# letra e
+
+# Com base nas representações gráficas, observa-se que existem diferenças marcantes entre machos e fêmeas em bonobos e chimpanzés. Nos chimpanzés, os machos geralmente possuem um peso maior em comparação às fêmeas. Nos bonobos, embora essa diferença também esteja presente, ela é menos pronunciada. Ao comparar as duas espécies, os chimpanzés, de maneira geral, apresentam maior peso do que os bonobos, tanto entre machos quanto entre fêmeas.
+
+# letra f
+
+indices <- sample(1:nrow(dados_arquivo2), 0.7 * nrow(dados_arquivo2))
+treino <- dados_arquivo2[indices, ]
+teste <- dados_arquivo2[-indices, ]
+
+prever <- function(altura, peso, genero) {
+  if (peso > 60) {
+    return("chimpanzé")
+  } else if (peso <= 60 & genero == "M") {
+    if (tamanho > 120) {
+      return("chimpanzé")
+    } else {
+      return("bonobo")
+    }
+  } else if (peso <= 60 & genero == "F") {
+    if (tamanho > 110) {
+      return("chimpanzé")
+    } else {
+      return("bonobo")
+    }
+  } else {
+    return("bonobo")
+  }
+}
+
+resultados_primatas <- c()
+for (i in 1:nrow(teste)) {
+  resultados_primatas[i] <- prever(teste$altura[i], teste$peso[i], teste$genero[i])
+}
+
+mean(teste$especie == resultados_primatas)
+
+#------------------------------------------------------------
